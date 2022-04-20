@@ -9,6 +9,12 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-controller="students" asp-action="Index">
+    <p>
+        姓名查询: <input type="text" name="SearchString" />
+        <input type="submit" value="查询" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>

@@ -21,9 +21,14 @@ namespace MvcStudent.Controllers
         }
 
         // GET: students
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.student.ToListAsync());
+            var students = from m in _context.student select m;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s => s.Name!.Contains(searchString));
+            }
+            return View(await students.ToListAsync());
         }
 
         // GET: students/Details/5
