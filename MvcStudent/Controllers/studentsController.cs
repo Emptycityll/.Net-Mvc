@@ -21,14 +21,39 @@ namespace MvcStudent.Controllers
         }
 
         // GET: students
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string studentGender, string searchString)
         {
-            var students = from m in _context.student select m;
-            if (!String.IsNullOrEmpty(searchString))
+            //   var students = from m in _context.student select m;
+            //   if (!String.IsNullOrEmpty(searchString))
+            //   {
+            //       students = students.Where(s => s.Name!.Contains(searchString));
+            //   }
+
+            //   return View(await students.ToListAsync());
+            // Use LINQ to get list of genres.
+            IQueryable<string> genreQuery = from m in _context.student
+                                            orderby m.Gender
+                                            select m.Gender;
+            var students = from m in _context.student
+                         select m;
+
+            if (!string.IsNullOrEmpty(searchString))
             {
                 students = students.Where(s => s.Name!.Contains(searchString));
             }
-            return View(await students.ToListAsync());
+
+            if (!string.IsNullOrEmpty(studentGender))
+            {
+                students = students.Where(x => x.Gender == studentGender);
+            }
+
+            var StudentGenreVM = new StudentGenreViewModel
+            {
+                Gender = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                students = await students.ToListAsync()
+            };
+
+            return View(StudentGenreVM);
         }
 
         // GET: students/Details/5

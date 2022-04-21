@@ -1,6 +1,5 @@
-﻿@model IEnumerable<MvcStudent.Models.student>
-
-@{
+﻿
+@model MvcStudent.Models.StudentGenreViewModel
     ViewData["Title"] = "Index";
 }
 
@@ -11,6 +10,10 @@
 </p>
 <form asp-controller="students" asp-action="Index">
     <p>
+         <select asp-for="studentGender" asp-items="Model.Gender">
+         <option value="">All</option>
+         </select>
+    
         姓名查询: <input type="text" name="SearchString" />
         <input type="submit" value="查询" />
     </p>
@@ -19,31 +22,31 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.students[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Gender)
+                @Html.DisplayNameFor(model => model.students[1].Gender)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Age)
+                @Html.DisplayNameFor(model => model.students[2].Age)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Birthday)
+                @Html.DisplayNameFor(model => model.students[3].Birthday)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Mobile)
+                @Html.DisplayNameFor(model => model.students[4].Mobile)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Temperature)
+                @Html.DisplayNameFor(model => model.students[5].Temperature)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Tbrq)
+                @Html.DisplayNameFor(model => model.students[6].Tbrq)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.students) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
