@@ -23,7 +23,7 @@ namespace MvcStudent.Models
         public DateTime Birthday { get; set; }//出生日期
         [Display(Name = "电话")]
         [StringLength(13)]
-        [RegularExpression(@"^\d+$", ErrorMessage = "请输入正确的联系方式")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "请输入正确的电话号码：")]
         [Required]
         
         public string? Mobile { get; set; }//电话（13位）
