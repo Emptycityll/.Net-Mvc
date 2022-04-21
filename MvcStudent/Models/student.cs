@@ -23,9 +23,12 @@ namespace MvcStudent.Models
         public DateTime Birthday { get; set; }//出生日期
         [Display(Name = "电话")]
         [StringLength(13)]
+        [RegularExpression(@"^\d+$", ErrorMessage = "请输入正确的联系方式")]
+        [Required]
+        
         public string? Mobile { get; set; }//电话（13位）
         [Display(Name = "体温")]
-       // [Column(TypeName = "Double(2,1)")]
+       // [Column(TypeName = "double(2,1)")]
         [Range(30,50)]
         public int Temperature { get; set; }//体温（30-50）
         [Display(Name = "登记日期")]
